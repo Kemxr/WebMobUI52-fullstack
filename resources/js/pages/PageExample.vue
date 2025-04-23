@@ -12,6 +12,7 @@ const { data: data2, error: error2} = useFetchJson({url: 'test', method: 'DELETE
     <p>{{ data }}</p>
     <p>{{ data2 }}</p>
     <p>{{ error2 }}</p>
+    <p>Salut</p>
   </div>
 </template>
 
