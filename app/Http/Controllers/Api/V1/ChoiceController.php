@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Choice;
 use Illuminate\Http\Request;
+use App\Http\Requests\ChoiceStoreRequest;
+use App\Http\Requests\ChoiceUpdateRequest;
 
 class ChoiceController extends Controller
 {
@@ -24,29 +26,41 @@ class ChoiceController extends Controller
         );
     }
 
-    // Créer un choix
-    public function createChoice(Request $request)
-    {
-        $data = $request->validate([
-            'chapter_id' => 'required|exists:chapters,id',
-            'text' => 'required|string|max:255',
-            'target_chapter_id' => 'nullable|exists:chapters,id',
-        ]);
+    // // Créer un choix
+    // public function createChoice(Request $request)
+    // {
+    //     $data = $request->validate([
+    //         'chapter_id' => 'required|exists:chapters,id',
+    //         'text' => 'required|string|max:255',
+    //         'target_chapter_id' => 'nullable|exists:chapters,id',
+    //     ]);
 
-        $choice = Choice::create($data);
+    //     $choice = Choice::create($data);
+    //     return response()->json($choice, 201);
+    // }
+
+    // // Mettre à jour un choix
+    // public function updateChoice(Request $request, $id)
+    // {
+    //     $choice = Choice::findOrFail($id);
+
+    //     $choice->update($request->validate([
+    //         'text' => 'sometimes|string|max:255',
+    //         'target_chapter_id' => 'nullable|exists:chapters,id',
+    //     ]));
+
+    //     return response()->json($choice);
+    // }
+    public function createChoice(ChoiceStoreRequest $request)
+    {
+        $choice = Choice::create($request->validated());
         return response()->json($choice, 201);
     }
 
-    // Mettre à jour un choix
-    public function updateChoice(Request $request, $id)
+    public function updateChoice(ChoiceUpdateRequest $request, $id)
     {
         $choice = Choice::findOrFail($id);
-
-        $choice->update($request->validate([
-            'text' => 'sometimes|string|max:255',
-            'target_chapter_id' => 'nullable|exists:chapters,id',
-        ]));
-
+        $choice->update($request->validated());
         return response()->json($choice);
     }
 
