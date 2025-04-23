@@ -8,35 +8,49 @@ use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
-    public function index()
+    // Récupérer toutes les histoires
+    public function getStories()
     {
-        return Story::all();
+        return response()->json(Story::all());
     }
 
-    public function show(Story $story)
+    // Récupérer une histoire spécifique
+    public function getStory($id)
     {
-        return $story->load('chapters');
+        return response()->json(
+            Story::with('chapters.choices')->findOrFail($id)
+        );
     }
 
-    public function store(Request $request)
+    // Créer une histoire
+    public function createStory(Request $request)
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
 
-        return Story::create($data);
+        $story = Story::create($data);
+        return response()->json($story, 201);
     }
 
-    public function update(Request $request, Story $story)
+    // Mettre à jour une histoire
+    public function updateStory(Request $request, $id)
     {
-        $story->update($request->only(['title', 'description']));
-        return $story;
+        $story = Story::findOrFail($id);
+
+        $story->update($request->validate([
+            'title' => 'sometimes|string|max:255',
+            'description' => 'nullable|string',
+        ]));
+
+        return response()->json($story);
     }
 
-    public function destroy(Story $story)
+    // Supprimer une histoire
+    public function deleteStory($id)
     {
-        $story->delete();
+        Story::findOrFail($id)->delete();
         return response()->json(null, 204);
     }
 }

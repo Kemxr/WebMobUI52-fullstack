@@ -8,17 +8,22 @@ use Illuminate\Http\Request;
 
 class ChapterController extends Controller
 {
-    public function index()
+    // Récupérer tous les chapitres
+    public function getChapters()
     {
-        return Chapter::with('choices')->get();
+        return response()->json(Chapter::with('choices')->get());
     }
 
-    public function show(Chapter $chapter)
+    // Récupérer un chapitre spécifique par ID
+    public function getChapter($id)
     {
-        return $chapter->load('choices');
+        return response()->json(
+            Chapter::with('choices')->findOrFail($id)
+        );
     }
 
-    public function store(Request $request)
+    // Créer un chapitre
+    public function createChapter(Request $request)
     {
         $data = $request->validate([
             'story_id' => 'required|exists:stories,id',
@@ -26,18 +31,27 @@ class ChapterController extends Controller
             'content' => 'required|string',
         ]);
 
-        return Chapter::create($data);
+        $chapter = Chapter::create($data);
+        return response()->json($chapter, 201);
     }
 
-    public function update(Request $request, Chapter $chapter)
+    // Mettre à jour un chapitre
+    public function updateChapter(Request $request, $id)
     {
-        $chapter->update($request->only(['number', 'content']));
-        return $chapter;
+        $chapter = Chapter::findOrFail($id);
+
+        $chapter->update($request->validate([
+            'number' => 'sometimes|integer|min:1',
+            'content' => 'sometimes|string',
+        ]));
+
+        return response()->json($chapter);
     }
 
-    public function destroy(Chapter $chapter)
+    // Supprimer un chapitre
+    public function deleteChapter($id)
     {
-        $chapter->delete();
+        Chapter::findOrFail($id)->delete();
         return response()->json(null, 204);
     }
 }

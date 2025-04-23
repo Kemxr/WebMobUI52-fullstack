@@ -8,17 +8,24 @@ use Illuminate\Http\Request;
 
 class ChoiceController extends Controller
 {
-    public function index()
+    // Récupérer tous les choix
+    public function getChoices()
     {
-        return Choice::with(['chapter', 'target'])->get();
+        return response()->json(
+            Choice::with(['chapter', 'target'])->get()
+        );
     }
 
-    public function show(Choice $choice)
+    // Récupérer un choix précis
+    public function getChoice($id)
     {
-        return $choice->load(['chapter', 'target']);
+        return response()->json(
+            Choice::with(['chapter', 'target'])->findOrFail($id)
+        );
     }
 
-    public function store(Request $request)
+    // Créer un choix
+    public function createChoice(Request $request)
     {
         $data = $request->validate([
             'chapter_id' => 'required|exists:chapters,id',
@@ -26,18 +33,27 @@ class ChoiceController extends Controller
             'target_chapter_id' => 'nullable|exists:chapters,id',
         ]);
 
-        return Choice::create($data);
+        $choice = Choice::create($data);
+        return response()->json($choice, 201);
     }
 
-    public function update(Request $request, Choice $choice)
+    // Mettre à jour un choix
+    public function updateChoice(Request $request, $id)
     {
-        $choice->update($request->only(['text', 'target_chapter_id']));
-        return $choice;
+        $choice = Choice::findOrFail($id);
+
+        $choice->update($request->validate([
+            'text' => 'sometimes|string|max:255',
+            'target_chapter_id' => 'nullable|exists:chapters,id',
+        ]));
+
+        return response()->json($choice);
     }
 
-    public function destroy(Choice $choice)
+    // Supprimer un choix
+    public function deleteChoice($id)
     {
-        $choice->delete();
+        Choice::findOrFail($id)->delete();
         return response()->json(null, 204);
     }
 }
