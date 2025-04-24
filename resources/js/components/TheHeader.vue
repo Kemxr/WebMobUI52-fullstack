@@ -4,7 +4,7 @@
 
 <template>
   <header>
-    <h1>Header</h1>
+    <h1>Le labyrinthe des ombres</h1>
   </header>
 </template>
 
