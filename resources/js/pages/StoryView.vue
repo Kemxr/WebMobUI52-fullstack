@@ -59,13 +59,41 @@ watchEffect(() => {
 </script>
 
 <template>
-    <div>
-        <p v-if="loading">Chargement...</p>
-        <p v-if="error">Erreur : {{ error.message }}</p>
+    <div class="chapter-container pixel-border">
+        <p v-if="loading" class="loading">Chargement...</p>
+        <p v-if="error" class="error">Erreur : {{ error.message }}</p>
         <ChapterDisplay v-if="data" :chapter="data" />
     </div>
 </template>
 
-<style scoped>
 
+<style scoped>
+.chapter-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: rgba(25, 25, 30, 0.9);
+  border: 3px solid #4ffa00;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 255, 21, 0.5);
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  color: #4ffa00;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+@media (max-width: 850px) {
+  .chapter-container {
+    margin: 0 1rem;
+    padding: 1rem;
+  }
+}
 </style>
