@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, computed } from 'vue';
+import { ref, watchEffect, computed, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useFetchJson } from '@/composables/useFetchJson';
 import ChapterDisplay from '../components/ChapterDisplay.vue';
@@ -15,7 +15,7 @@ let abortController = null;
 
 // Fonction pour charger les données du chapitre
 const fetchChapter = async (id) => {
-    // Abandonner la requête précédente si elle existe
+    // Abandonner la requête d'avant si elle existe
     if (abortController) {
         abortController.abort();
     }
@@ -56,6 +56,20 @@ watchEffect(() => {
         fetchChapter(chapterId.value);
     }
 });
+
+// watch(chapterId, (newId) => {
+//   if (newId) {
+//     localStorage.setItem('progression', newId);
+//     fetchChapter(newId);
+//   }
+// }, { immediate: true });
+
+// onMounted(() => {
+//   const saved = localStorage.getItem('progression');
+//   if (saved && route.path === '/') {
+//     route.replace(`/chapitre/${saved}`);
+//   }
+// });
 </script>
 
 <template>

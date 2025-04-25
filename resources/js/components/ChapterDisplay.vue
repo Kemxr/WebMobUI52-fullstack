@@ -6,7 +6,7 @@
         <h3>Choix :</h3>
         <ul>
             <li v-for="choice in chapter.choices" :key="choice.text">
-                <RouterLink :to="`/chapitre/${choice.target_chapter_id}`">
+                <RouterLink :to="`/chapitre/${choice.target_chapter_id || 1}`">
                     {{ choice.text }}
                 </RouterLink>
             </li>
