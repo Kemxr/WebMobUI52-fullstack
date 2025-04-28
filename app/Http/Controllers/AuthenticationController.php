@@ -17,5 +17,6 @@ class AuthenticationController extends Controller
         //... suite de la logique
     }
 
-    //Rajouter une migration pour compléter la table users avec les champs firstname et lastname
+    //Rajouter une migration pour compléter la table users avec le champ name
+    //Rajouter la logique dans Login
 }

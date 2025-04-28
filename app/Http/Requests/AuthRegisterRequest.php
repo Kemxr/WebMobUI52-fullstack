@@ -22,8 +22,7 @@ class AuthRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => 'required|string|max:255|min:2',
-            'lastname' => 'required|string|max:255|min:2',
+            'name' => 'required|string|max:255|min:2',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|max:25|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,25}$/',
         ];

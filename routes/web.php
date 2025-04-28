@@ -41,3 +41,8 @@ Route::prefix('api/v1')->group(function () {
   Route::put('/stories/{id}', [StoryController::class, 'updateStory']);
   Route::delete('/stories/{id}', [StoryController::class, 'deleteStory']);
 });
+
+//Gère le refresh de la page
+Route::get('/{any}', function () {
+  return view('test');
+})->where('any', '.*');

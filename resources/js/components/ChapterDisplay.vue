@@ -1,3 +1,12 @@
+<script setup>
+defineProps({
+    chapter: {
+        type: Object,
+        required: true
+    }
+});
+</script>
+
 <template>
     <div>
         <h2>Chapitre {{ chapter.number }}</h2>
@@ -13,15 +22,6 @@
         </ul>
     </div>
 </template>
-
-<script setup>
-defineProps({
-    chapter: {
-        type: Object,
-        required: true
-    }
-});
-</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');

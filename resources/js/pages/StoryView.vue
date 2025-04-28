@@ -5,7 +5,20 @@ import { useFetchJson } from '@/composables/useFetchJson';
 import ChapterDisplay from '../components/ChapterDisplay.vue';
 
 const route = useRoute();
-const chapterId = computed(() => route.params.id || 1);
+// const chapterId = computed(() => route.params.id || 1);
+//Chapter id en fonction de la route ou du localStorage
+const chapterId = computed(() => {
+    if (route.params.id) {
+        return route.params.id;
+    } else if (localStorage.getItem('progression')) {
+        return localStorage.getItem('progression');
+    } else if (route.query.id) {
+        return route.query.id;
+    } else {
+        return 1; // Valeur par défaut
+        
+    } 
+});
 
 // Références réactives pour les données
 const data = ref(null);
@@ -57,16 +70,16 @@ watchEffect(() => {
     }
 });
 
-// watch(chapterId, (newId) => {
-//   if (newId) {
-//     localStorage.setItem('progression', newId);
-//     fetchChapter(newId);
-//   }
-// }, { immediate: true });
+watch(chapterId, (newId) => {
+  if (newId) {
+    localStorage.setItem('progression', newId);
+    fetchChapter(newId);
+  }
+}, { immediate: true });
 
 // onMounted(() => {
 //   const saved = localStorage.getItem('progression');
-//   if (saved && route.path === '/') {
+//   if (saved) {
 //     route.replace(`/chapitre/${saved}`);
 //   }
 // });
@@ -94,10 +107,10 @@ watchEffect(() => {
 
 .loading, .error {
   text-align: center;
-  padding: 2rem;
+  padding: 0.2rem;
   font-family: 'Press Start 2P', cursive;
   font-size: 1rem;
-  color: #4ffa00;
+  color: #ffffff;
 }
 
 .error {

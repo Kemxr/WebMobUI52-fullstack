@@ -7,10 +7,10 @@ const routes = [
     name: 'Chapter',
     component: StoryView
   },
-  {
-    path: '/',
-    redirect: '/chapitre/1'
-  }
+  // {
+  //   path: '/',
+  //   redirect: '/chapitre/1'
+  // }
 ];
 
 const router = createRouter({
