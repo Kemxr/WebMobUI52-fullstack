@@ -15,7 +15,7 @@ const chapterId = computed(() => {
     } else if (route.query.id) {
         return route.query.id;
     } else {
-        return 1; // Valeur par défaut
+        return 1; 
         
     } 
 });
@@ -26,7 +26,7 @@ const error = ref(null);
 const loading = ref(false);
 let abortController = null;
 
-// Fonction pour charger les données du chapitre
+
 const fetchChapter = async (id) => {
     // Abandonner la requête d'avant si elle existe
     if (abortController) {
@@ -37,7 +37,7 @@ const fetchChapter = async (id) => {
     error.value = null;
 
     try {
-        // Créer un nouveau AbortController pour cette requête
+
         abortController = new AbortController();
 
         const response = await fetch(`/api/v1/chapters/${id}`, {
