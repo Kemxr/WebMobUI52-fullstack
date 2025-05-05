@@ -86,6 +86,8 @@ h1 {
   color: #a83eff;
   text-shadow: 3px 3px 0px rgba(0, 201, 17, 0.3), 
                5px 5px 0px rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 
 .header-buttons {

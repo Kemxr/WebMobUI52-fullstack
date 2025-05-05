@@ -28,32 +28,31 @@ Route::middleware('auth')->group(function () {
 Route::prefix('api/v1')->group(function () {
   Route::get('/chapters', [ChapterController::class, 'getChapters']);
   Route::get('/chapters/{id}', [ChapterController::class, 'getChapter']);
-  Route::post('/chapters', [ChapterController::class, 'createChapter']);
-  Route::put('/chapters/{id}', [ChapterController::class, 'updateChapter']);
-  Route::delete('/chapters/{id}', [ChapterController::class, 'deleteChapter']);
+  Route::post('/chapters', [ChapterController::class, 'createChapter'])->middleware('admin');
+  Route::put('/chapters/{id}', [ChapterController::class, 'updateChapter'])->middleware('admin');
+  Route::delete('/chapters/{id}', [ChapterController::class, 'deleteChapter'])->middleware('admin');
 });
 
 Route::prefix('api/v1')->group(function () {
   Route::get('/choices', [ChoiceController::class, 'getChoices']);
   Route::get('/choices/{id}', [ChoiceController::class, 'getChoice']);
-  Route::post('/choices', [ChoiceController::class, 'createChoice']);
-  Route::put('/choices/{id}', [ChoiceController::class, 'updateChoice']);
-  Route::delete('/choices/{id}', [ChoiceController::class, 'deleteChoice']);
+  Route::post('/choices', [ChoiceController::class, 'createChoice'])->middleware('admin');
+  Route::put('/choices/{id}', [ChoiceController::class, 'updateChoice'])->middleware('admin');
+  Route::delete('/choices/{id}', [ChoiceController::class, 'deleteChoice'])->middleware('admin');
 });
 
 Route::prefix('api/v1')->group(function () {
-  Route::get('/stories', [StoryController::class, 'getStories']);
+  Route::get('/stories', [StoryController::class, 'getStories'])->middleware('admin');
   Route::get('/stories/{id}', [StoryController::class, 'getStory']);
-  Route::post('/stories', [StoryController::class, 'createStory']);
-  Route::put('/stories/{id}', [StoryController::class, 'updateStory']);
-  Route::delete('/stories/{id}', [StoryController::class, 'deleteStory']);
+  Route::post('/stories', [StoryController::class, 'createStory'])->middleware('admin');
+  Route::put('/stories/{id}', [StoryController::class, 'updateStory'])->middleware('admin');
+  Route::delete('/stories/{id}', [StoryController::class, 'deleteStory'])->middleware('admin');
 });
 
 //Authentification
 Route::get('/register', [AuthenticationController::class, 'showRegisterForm'])->name('showRegister')->middleware('guest');
 Route::post('/register', [AuthenticationController::class, 'register'])->name('register');
 
-//Mettre middleware auth dans les autres routes
 Route::get('/login', [AuthenticationController::class, 'showLoginForm'])->name('showLoginForm')->middleware('guest');
 Route::post('/login', [AuthenticationController::class, 'login'])->name('login');
 

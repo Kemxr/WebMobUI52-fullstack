@@ -1,13 +1,19 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 defineProps({
     chapter: {
         type: Object,
         required: true
     }
 });
+
 // changer l'url en fonction du choice.target_chapter_id
 function changeUrl(chapterId) {
-    window.location.href = `/chapitre/${chapterId}`;
+    localStorage.setItem('progression', chapterId);
+    router.push(`/chapitre/${chapterId}`);
 }
 </script>
 
@@ -19,7 +25,7 @@ function changeUrl(chapterId) {
         <h3>Choix :</h3>
         <ul>
             <li v-for="choice in chapter.choices" :key="choice.text">
-                <RouterLink :to="`/chapitre/${choice.target_chapter_id || 1}`">
+                <RouterLink @click="changeUrl(choice.target_chapter_id || 1)" :to="`/chapitre/${choice.target_chapter_id}`">
                     {{ choice.text }}
                 </RouterLink>
             </li>

@@ -86,6 +86,7 @@
           font-family: 'Press Start 2P', cursive;
           font-size: 0.7rem;
           opacity: 0.8;
+          padding-left: 0.5rem;
         }
         
         form button {

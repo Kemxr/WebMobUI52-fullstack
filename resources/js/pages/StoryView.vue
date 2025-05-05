@@ -52,7 +52,8 @@ watch(chapterId, (newId) => {
 .chapter-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   background-color: rgba(25, 25, 30, 0.9);
   border: 3px solid #4ffa00;
   border-radius: 8px;
