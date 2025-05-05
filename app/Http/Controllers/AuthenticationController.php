@@ -24,6 +24,10 @@ class AuthenticationController extends Controller
  
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            //Faire migration pour le role admin et rajouter dans l'authentification si admin
+            // if (Auth::user()->role == 'admin') {
+            //    $request->session()->set('isAdmin', true);
+            // }
  
             return redirect()->intended('/chapitre/1');
         }

@@ -5,6 +5,10 @@ defineProps({
         required: true
     }
 });
+// changer l'url en fonction du choice.target_chapter_id
+function changeUrl(chapterId) {
+    window.location.href = `/chapitre/${chapterId}`;
+}
 </script>
 
 <template>

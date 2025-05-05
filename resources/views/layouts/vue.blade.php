@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="api-base-url" content="{{ url('api/v1') }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('mazeIcon.svg') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <title>@yield('title')</title>
     {{-- Exposer le user et le token pour utilisation dans la vue --}}
     <script>

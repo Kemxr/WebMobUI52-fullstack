@@ -1,12 +1,12 @@
 <script setup>
-import { ref, watchEffect, computed, watch, onMounted } from 'vue';
+import { ref, watchEffect, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { useFetchJson } from '@/composables/useFetchJson';
+import { useFetchChapter } from '@/composables/fetchChapter';
 import ChapterDisplay from '../components/ChapterDisplay.vue';
 
 const route = useRoute();
-// const chapterId = computed(() => route.params.id || 1);
-//Chapter id en fonction de la route ou du localStorage
+
+// Déterminer l'ID du chapitre en fonction de la route ou du localStorage
 const chapterId = computed(() => {
     if (route.params.id) {
         return route.params.id;
@@ -15,74 +15,29 @@ const chapterId = computed(() => {
     } else if (route.query.id) {
         return route.query.id;
     } else {
-        return 1; 
-        
+        return 1;  
     } 
 });
 
-// Références réactives pour les données
-const data = ref(null);
-const error = ref(null);
-const loading = ref(false);
-let abortController = null;
+// Utiliser le composable fetchChapter
+const { data, error, loading, fetchChapter } = useFetchChapter();
 
 
-const fetchChapter = async (id) => {
-    // Abandonner la requête d'avant si elle existe
-    if (abortController) {
-        abortController.abort();
-    }
-
-    loading.value = true;
-    error.value = null;
-
-    try {
-
-        abortController = new AbortController();
-
-        const response = await fetch(`/api/v1/chapters/${id}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            signal: abortController.signal
-        });
-
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-
-        data.value = await response.json();
-    } catch (e) {
-        if (e.name !== 'AbortError') {
-            error.value = e;
-        }
-    } finally {
-        loading.value = false;
-    }
-};
-
-// Utiliser watchEffect pour réagir aux changements de route
+// Réagir aux changements de chapterId
 watchEffect(() => {
     if (chapterId.value) {
+        console.log('Fetching chapter with ID:', chapterId.value);
         fetchChapter(chapterId.value);
     }
 });
 
 watch(chapterId, (newId) => {
-  if (newId) {
-    localStorage.setItem('progression', newId);
-    fetchChapter(newId);
-  }
+    if (newId) {
+        localStorage.setItem('progression', newId);
+        // fetchChapter(newId);
+    }
 }, { immediate: true });
 
-// onMounted(() => {
-//   const saved = localStorage.getItem('progression');
-//   if (saved) {
-//     route.replace(`/chapitre/${saved}`);
-//   }
-// });
 </script>
 
 <template>
@@ -92,7 +47,6 @@ watch(chapterId, (newId) => {
         <ChapterDisplay v-if="data" :chapter="data" />
     </div>
 </template>
-
 
 <style scoped>
 .chapter-container {

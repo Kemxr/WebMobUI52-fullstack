@@ -6,24 +6,24 @@ use App\Http\Controllers\Api\V1\ChapterController;
 use App\Http\Controllers\Api\V1\ChoiceController;
 use App\Http\Controllers\AuthenticationController;
 
-//Modifier les routes pour qu'on puisse uniquement accéder à la page des histoires si on est connecté
 
 // Route::get('/', function () {
 //   return view('test');
 // });
 
 Route::get('/', function () {
+  if (Auth::check()) {
+      return redirect()->route('chapter', ['id' => 1]);
+  }
   return redirect()->route('showLoginForm');
 });
 
-Route::prefix('api/v1/')->group(function () {
-  Route::get('/test', function () {
-    return response()->json(['message' => 'Hello, World from api!']);
-  });
-  Route::delete('/test', function () {
-    return response()->json(['message' => 'Deleting']);
-  });
+Route::middleware('auth')->group(function () {
+  Route::get('/chapitre/{id}', function ($id) {
+      return view('test');
+  })->name('chapter');
 });
+
 
 Route::prefix('api/v1')->group(function () {
   Route::get('/chapters', [ChapterController::class, 'getChapters']);
@@ -31,7 +31,7 @@ Route::prefix('api/v1')->group(function () {
   Route::post('/chapters', [ChapterController::class, 'createChapter']);
   Route::put('/chapters/{id}', [ChapterController::class, 'updateChapter']);
   Route::delete('/chapters/{id}', [ChapterController::class, 'deleteChapter']);
-})->middleware('auth');
+});
 
 Route::prefix('api/v1')->group(function () {
   Route::get('/choices', [ChoiceController::class, 'getChoices']);
@@ -60,18 +60,18 @@ Route::post('/login', [AuthenticationController::class, 'login'])->name('login')
 Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
 // Routes protégées par le middleware `auth`
-Route::middleware('auth')->group(function () {
-  Route::get('/chapitre/1', function () {
-      return view('test'); // Remplacez "test" par la vue associée à votre page d'histoire
-  })->name('chapter1');
-});
+// Route::middleware('auth')->group(function () {
+//   Route::get('/chapitre/1', function () {
+//       return view('test');
+//   })->name('chapter1');
+// });
 
 //Gère le refresh de la page
-// Route::get('/{any}', function () {
-//   return view('test');
-// })->where('any', '.*');
-
-// Gère le refresh de la page
 Route::get('/{any}', function () {
   return view('test');
-})->where('any', '.*')->middleware('auth');
+})->where('any', '.*');
+
+// Gère le refresh de la page
+// Route::get('/{any}', function () {
+//   return view('test');
+// })->where('any', '.*')->middleware('auth');
