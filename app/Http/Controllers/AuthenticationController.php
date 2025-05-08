@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
             //    $request->session()->set('isAdmin', true);
             // }
  
-            return redirect()->intended('/chapitre/1');
+            return redirect()->route('home')->with('success', 'Connexion réussie !');
         }
  
         return back()->withErrors([

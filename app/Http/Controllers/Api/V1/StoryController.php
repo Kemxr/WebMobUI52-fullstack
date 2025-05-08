@@ -10,13 +10,17 @@ use App\Http\Requests\StoryUpdateRequest;
 
 class StoryController extends Controller
 {
-    // Récupérer toutes les histoires
+    public function index()
+    {
+        $stories = Story::all();
+        return view('home', compact('stories'));
+    }
+    
     public function getStories()
     {
         return response()->json(Story::all());
     }
 
-    // Récupérer une histoire spécifique
     public function getStory($id)
     {
         return response()->json(
@@ -62,7 +66,6 @@ class StoryController extends Controller
         return response()->json($story);
     }
 
-    // Supprimer une histoire
     public function deleteStory($id)
     {
         Story::findOrFail($id)->delete();

@@ -6,14 +6,15 @@ use App\Http\Controllers\Api\V1\ChapterController;
 use App\Http\Controllers\Api\V1\ChoiceController;
 use App\Http\Controllers\AuthenticationController;
 
+Route::get('/home', [StoryController::class, 'index'])->middleware('auth')->name('home');
 
-// Route::get('/', function () {
-//   return view('test');
-// });
+Route::get('/story/{id}', function () {
+  return view('test');
+})->middleware('auth')->name('stories.show');
 
 Route::get('/', function () {
   if (Auth::check()) {
-      return redirect()->route('chapter', ['id' => 1]);
+      return view('test');
   }
   return redirect()->route('showLoginForm');
 });
@@ -24,7 +25,7 @@ Route::middleware('auth')->group(function () {
   })->name('chapter');
 });
 
-
+//Chapitres
 Route::prefix('api/v1')->group(function () {
   Route::get('/chapters', [ChapterController::class, 'getChapters']);
   Route::get('/chapters/{id}', [ChapterController::class, 'getChapter']);
@@ -33,6 +34,7 @@ Route::prefix('api/v1')->group(function () {
   Route::delete('/chapters/{id}', [ChapterController::class, 'deleteChapter'])->middleware('admin');
 });
 
+//Choix
 Route::prefix('api/v1')->group(function () {
   Route::get('/choices', [ChoiceController::class, 'getChoices']);
   Route::get('/choices/{id}', [ChoiceController::class, 'getChoice']);
@@ -41,12 +43,13 @@ Route::prefix('api/v1')->group(function () {
   Route::delete('/choices/{id}', [ChoiceController::class, 'deleteChoice'])->middleware('admin');
 });
 
+//Histoires
 Route::prefix('api/v1')->group(function () {
-  Route::get('/stories', [StoryController::class, 'getStories'])->middleware('admin');
+  Route::get('/stories', [StoryController::class, 'getStories']);
   Route::get('/stories/{id}', [StoryController::class, 'getStory']);
-  Route::post('/stories', [StoryController::class, 'createStory'])->middleware('admin');
-  Route::put('/stories/{id}', [StoryController::class, 'updateStory'])->middleware('admin');
-  Route::delete('/stories/{id}', [StoryController::class, 'deleteStory'])->middleware('admin');
+  Route::post('/stories', [StoryController::class, 'createStory'])->middleware('admin')->name('createStory');
+  Route::put('/stories/{id}', [StoryController::class, 'updateStory'])->middleware('admin')->name('updateStory');
+  Route::delete('/stories/{id}', [StoryController::class, 'deleteStory'])->middleware('admin')->name('deleteStory');
 });
 
 //Authentification
@@ -58,19 +61,7 @@ Route::post('/login', [AuthenticationController::class, 'login'])->name('login')
 
 Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
 
-// Routes protégées par le middleware `auth`
-// Route::middleware('auth')->group(function () {
-//   Route::get('/chapitre/1', function () {
-//       return view('test');
-//   })->name('chapter1');
-// });
-
 //Gère le refresh de la page
 Route::get('/{any}', function () {
   return view('test');
 })->where('any', '.*');
-
-// Gère le refresh de la page
-// Route::get('/{any}', function () {
-//   return view('test');
-// })->where('any', '.*')->middleware('auth');

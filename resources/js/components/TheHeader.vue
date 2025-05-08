@@ -10,6 +10,7 @@ const csrfToken = window.Laravel && window.Laravel.csrfToken ? window.Laravel.cs
     </h1>
     <div class="header-buttons">
       <template v-if="user">
+        <a href="/home" id="homeBtn" class="btn">Home</a>
         <span class="welcome-text">Bienvenue, {{ user.name }}</span>
         <form method="POST" action="/logout" class="logout-form">
           <input type="hidden" name="_token" :value="csrfToken">
@@ -54,6 +55,29 @@ h1 {
   display: block;
   text-align: center;
   margin-top: 1rem;
+}
+
+#homeBtn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #4ffa00;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 201, 17, 0.5);
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+#homeBtn:hover {
+  background-color: #121212;
+  color: #4ffa00;
+  box-shadow: 0 0 15px rgba(0, 255, 21, 0.7);
+  transform: scale(1.1);
 }
 
 #logoutBtn {
@@ -127,6 +151,24 @@ h1 {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }
+
+  #logoutBtn {
+    position: static;
+    margin-top: 1rem; 
+    font-size: 1rem; 
+    padding: 0.6rem 1rem; 
+    display: block; 
+    text-align: center; 
+  }
+
+  #homeBtn {
+    position: static;
+    margin-top: 1rem; 
+    font-size: 1rem; 
+    padding: 0.6rem 1rem; 
+    display: block; 
+    text-align: center; 
+  }
 }
 
 /* Responsive */
@@ -143,6 +185,16 @@ h1 {
   .btn {
     font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
+  }
+
+  #logoutBtn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  #homeBtn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
   }
 }
 </style>

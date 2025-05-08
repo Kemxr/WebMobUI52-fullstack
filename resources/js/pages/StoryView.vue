@@ -34,7 +34,6 @@ watchEffect(() => {
 watch(chapterId, (newId) => {
     if (newId) {
         localStorage.setItem('progression', newId);
-        // fetchChapter(newId);
     }
 }, { immediate: true });
 
