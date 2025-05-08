@@ -1,66 +1,196 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Histoires interactives
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Projet fullstack Laravel + Vue.js
 
-## About Laravel
+Ce projet est une application web interactive dans laquelle l'utilisateur incarne un archéologue explorant un labyrinthe mystique. L'histoire évolue selon les choix du joueur. C'est une application en Single Page Application (SPA) avec une API REST, une authentification, et un système de rôles (admin/user).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<img src="/public/mazeIcon.svg">
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📋 Table des matières
 
-## Learning Laravel
+- Objectifs du projet
+- Architecture technique
+- Fonctionnalités implémentées
+- Modèle de données
+- Guide d'installation
+- Sécurité
+- Technologies utilisées
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ✨ Objectifs du projet
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Créer une fiction interactive multi-plateforme stylisée "pixel rétro"
+- Implémenter une SPA performante avec Vue.js et une API Laravel
+- Intégrer un système de rôles (admin/user) pour la gestion des contenus
+- Favoriser l'autonomie narrative à travers des choix dynamiques et des embranchements multiples
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Architecture technique
 
-### Premium Partners
+### Backend — Laravel
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- API RESTful pour gérer les histoires, chapitres, et choix
+- Authentification avec Laravel Breeze
+- Middleware `admin` pour la protection des routes sensibles
+- Form Requests pour la validation sécurisée des données
 
-## Contributing
+### Frontend — Vue.js
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- SPA avec Vue Router
+- Composants réutilisables : ChapterDisplay, Header, etc.
+- Gestion dynamique du routing et de l’état
+- Requêtes HTTP via composable `useFetchJson`
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🌟 Fonctionnalités implémentées
 
-## Security Vulnerabilities
+### Authentification et rôles
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Inscription, connexion et déconnexion via formulaire sécurisé
+- Redirection automatique en fonction de l’état d’authentification
+- Middleware `admin` protégeant les routes de création, modification et suppression
 
-## License
+### Interaction narrative
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Accès à la liste des histoires après login
+- Navigation fluide entre chapitres selon les choix
+- Choix cliquables modifiant la progression
+
+### Interface utilisateur
+
+- Design inspiré du rétro gaming (pixel, vert néon)
+- Responsive (mobile, tablette, desktop)
+- Effets visuels au survol et transitions
+
+---
+
+## 📚 Modèle de données
+
+### Utilisateur (users)
+
+- id, name, email, password, role (admin ou user), timestamps
+
+### Histoire (stories)
+
+- id, title, description, timestamps
+
+### Chapitre (chapters)
+
+- id, story_id (clé étrangère), number, content, timestamps
+
+### Choix (choices)
+
+- id, chapter_id, text, target_chapter_id, timestamps
+
+---
+
+## 🚀 Guide d'installation
+
+### Prérequis
+
+- PHP >= 8.2
+- Composer
+- Node.js et npm
+- MySQL
+
+### Étapes
+
+1. Cloner le projet
+
+```
+git clone https://github.com/Kemxr/WebMobUI52-fullstack.git
+cd WebMobUI52-fullstack
+```
+
+1. Installer les dépendances
+
+```
+composer install
+npm install
+```
+
+1. Configurer l’environnement
+
+```
+cp .env.example .env
+php artisan key:generate
+```
+
+Configurer `.env` avec vos infos MySQL.
+
+1. Lancer la base de données
+
+```
+php artisan migrate --seed
+```
+
+1. Démarrer les serveurs
+
+```
+php artisan serve
+npm run dev
+```
+
+1. Se connecter en temps qu’admin
+
+email : admin@example.com
+
+password : Password123!
+
+---
+
+## 🔐 Sécurité
+
+- Validation des formulaires via FormRequest
+- Middleware `auth` + `admin`
+- Protection CSRF
+- Gestion des sessions Laravel
+
+---
+
+## 💻 Technologies utilisées
+
+### Backend
+
+- Laravel 10
+- Breeze (auth)
+- Eloquent ORM
+
+### Frontend
+
+- Vue.js 3
+- Vue Router
+- Vite
+
+### Autres
+
+- MySQL (base de données)
+- Composer / NPM
+- Git / GitHub
+
+---
+
+## 🔍 Tests des routes API
+
+### Exemple avec `curl`
+
+```
+curl -X GET http://localhost:8000/api/v1/stories
+```
+
+---
+
+## Auteurs
+
+- [Kemxr](https://github.com/Kemxr)
+
+---
+
+## **🧩**Conclusion
+
+Ce projet de plateforme d’histoires interactives démontre l'intégration complète entre une interface moderne (Vue.js) et un backend robuste (Laravel). Il permet de lire, gérer et enrichir des récits interactifs avec des choix narratifs dynamiques. *Le Labyrinthe des Ombres* n’est qu’un exemple : le système est conçu pour accueillir un catalogue croissant d’histoires. Le projet allie narration immersive, architecture fullstack modulaire et extensibilité future.
