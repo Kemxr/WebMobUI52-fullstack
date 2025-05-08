@@ -10,13 +10,13 @@ Ce projet est une application web interactive dans laquelle l'utilisateur incarn
 
 ## 📋 Table des matières
 
-- Objectifs du projet
-- Architecture technique
-- Fonctionnalités implémentées
-- Modèle de données
-- Guide d'installation
-- Sécurité
-- Technologies utilisées
+- [Objectifs du projet](#-objectifs-du-projet)
+- [Architecture technique](#-architecture-technique)
+- [Fonctionnalités implémentées](#-fonctionnalités-implémentées)
+- [Modèle de données](#-modèles-de-données)
+- [Guide d'installation](#-guide-dinstallation)
+- [Sécurité](#-sécurité)
+- [Technologies utilisées](#-technologies-utilisées)
 
 ---
 
@@ -107,14 +107,14 @@ git clone https://github.com/Kemxr/WebMobUI52-fullstack.git
 cd WebMobUI52-fullstack
 ```
 
-1. Installer les dépendances
+2. Installer les dépendances
 
 ```
 composer install
 npm install
 ```
 
-1. Configurer l’environnement
+3. Configurer l’environnement
 
 ```
 cp .env.example .env
@@ -123,20 +123,20 @@ php artisan key:generate
 
 Configurer `.env` avec vos infos MySQL.
 
-1. Lancer la base de données
+4. Lancer la base de données
 
 ```
 php artisan migrate --seed
 ```
 
-1. Démarrer les serveurs
+5. Démarrer les serveurs
 
 ```
-php artisan serve
-npm run dev
+composer run dev
 ```
+Et cliquer sur localhost:8000
 
-1. Se connecter en temps qu’admin
+6. Se connecter en temps qu’admin
 
 email : admin@example.com
 
