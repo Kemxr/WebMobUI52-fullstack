@@ -24,32 +24,6 @@ class ChapterController extends Controller
         );
     }
 
-    // // Créer un chapitre
-    // public function createChapter(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'story_id' => 'required|exists:stories,id',
-    //         'number' => 'required|integer|min:1',
-    //         'content' => 'required|string',
-    //     ]);
-
-    //     $chapter = Chapter::create($data);
-    //     return response()->json($chapter, 201);
-    // }
-
-    // // Mettre à jour un chapitre
-    // public function updateChapter(Request $request, $id)
-    // {
-    //     $chapter = Chapter::findOrFail($id);
-
-    //     $chapter->update($request->validate([
-    //         'number' => 'sometimes|integer|min:1',
-    //         'content' => 'sometimes|string',
-    //     ]));
-
-    //     return response()->json($chapter);
-    // }
-
     public function createChapter(ChapterStoreRequest $request)
     {
         $chapter = Chapter::create($request->validated());

@@ -28,31 +28,6 @@ class StoryController extends Controller
         );
     }
 
-    // // Créer une histoire
-    // public function createStory(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'title' => 'required|string|max:255',
-    //         'description' => 'nullable|string',
-    //     ]);
-
-    //     $story = Story::create($data);
-    //     return response()->json($story, 201);
-    // }
-
-    // // Mettre à jour une histoire
-    // public function updateStory(Request $request, $id)
-    // {
-    //     $story = Story::findOrFail($id);
-
-    //     $story->update($request->validate([
-    //         'title' => 'sometimes|string|max:255',
-    //         'description' => 'nullable|string',
-    //     ]));
-
-    //     return response()->json($story);
-    // }
-
     public function createStory(StoryStoreRequest $request)
     {
         $story = Story::create($request->validated());

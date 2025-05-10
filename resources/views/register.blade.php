@@ -23,6 +23,7 @@
                 <input type="password" name="password_confirmation" placeholder="Confirmer le mot de passe" required>
                 <button type="submit">S'inscrire</button>
             </form>
+            <p class="auth-link">Vous avez déjà un compte ? <a href="{{ route('login') }}">Connectez-vous</a></p>
         </div>
     </div>
 
@@ -34,7 +35,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #0d0d0d;
+            background-color: #0f0f17;
             font-family: 'Press Start 2P', cursive;
             color: #4ffa00;
         }

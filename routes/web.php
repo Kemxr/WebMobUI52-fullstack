@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\StoryController;
 use App\Http\Controllers\Api\V1\ChapterController;
 use App\Http\Controllers\Api\V1\ChoiceController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\Api\V1\ProgressionController;
 
 Route::get('/home', [StoryController::class, 'index'])->middleware('auth')->name('home');
 
@@ -24,6 +25,12 @@ Route::middleware('auth')->group(function () {
       return view('test');
   })->name('chapter');
 });
+
+//Progression
+Route::prefix('api/v1')->group(function () {
+  Route::get('/progression/{storyId}', [ProgressionController::class, 'getProgress'])->middleware('auth');
+  Route::post('/progression/{storyId}', [ProgressionController::class, 'updateProgress'])->middleware('auth');
+})->middleware('auth');
 
 //Chapitres
 Route::prefix('api/v1')->group(function () {
