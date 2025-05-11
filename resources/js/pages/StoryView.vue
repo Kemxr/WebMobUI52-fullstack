@@ -6,24 +6,27 @@ import ChapterDisplay from '../components/ChapterDisplay.vue';
 
 const route = useRoute();
 
+// Récupérer l'utilisateur connecté
+const user = window.Laravel && window.Laravel.user ? window.Laravel.user : null;
+
 // Déterminer l'ID du chapitre en fonction de la route ou du localStorage
 const chapterId = computed(() => {
+    if (!user) return 1; // Si aucun utilisateur, retourner le chapitre par défaut
+
+    const localStorageKey = `progression_user_${user.id}`;
     if (route.params.id) {
         return route.params.id;
-    } else if (localStorage.getItem('progression')) {
-        return localStorage.getItem('progression');
-    } else if (route.query.id) {
-        return route.query.id;
+    } else if (localStorage.getItem(localStorageKey)) {
+        return localStorage.getItem(localStorageKey);
     } else {
         return 1;  
     } 
 });
 
-// Utiliser le composable fetchChapter
+// Utiliser le composable pour récupérer les données du chapitre
 const { data, error, loading, fetchChapter } = useFetchChapter();
 
 
-// Réagir aux changements de chapterId
 watchEffect(() => {
     if (chapterId.value) {
         console.log('Fetching chapter with ID:', chapterId.value);
@@ -31,19 +34,30 @@ watchEffect(() => {
     }
 });
 
+// Sauvegarder la progression dans le localStorage par utilisateur
 watch(chapterId, (newId) => {
-    if (newId) {
-        localStorage.setItem('progression', newId);
+    if (newId && user) {
+        const localStorageKey = `progression_user_${user.id}`;
+        localStorage.setItem(localStorageKey, newId);
     }
 }, { immediate: true });
 
+// Mettre à jour la progression côté serveur
+const updateProgress = async (newChapterId) => {
+    if (user) {
+        const localStorageKey = `progression_user_${user.id}`;
+        localStorage.setItem(localStorageKey, newChapterId);
+        //Essayer de sauvegarder la progression sur le serveur si ya le temps
+        console.log(`Progression sauvegardée pour l'utilisateur ${user.id} : Chapitre ${newChapterId}`);
+    }
+};
 </script>
 
 <template>
     <div class="chapter-container pixel-border">
         <p v-if="loading" class="loading">Chargement...</p>
         <p v-if="error" class="error">Erreur : {{ error.message }}</p>
-        <ChapterDisplay v-if="data" :chapter="data" />
+        <ChapterDisplay v-if="data" :chapter="data" @change-chapter="updateProgress" />
     </div>
 </template>
 

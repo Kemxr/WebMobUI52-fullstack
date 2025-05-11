@@ -121,7 +121,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Configurer `.env` avec vos infos MySQL.
+Configurer `.env` avec vos infos SQLite.
 
 4. Lancer la base de données
 
@@ -158,7 +158,7 @@ password : Password123!
 ### Backend
 
 - Laravel 10
-- Breeze (auth)
+- Authentification personnalisée
 - Eloquent ORM
 
 ### Frontend
@@ -169,7 +169,7 @@ password : Password123!
 
 ### Autres
 
-- MySQL (base de données)
+- SQLite (base de données)
 - Composer / NPM
 - Git / GitHub
 

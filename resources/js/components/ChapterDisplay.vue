@@ -10,10 +10,12 @@ defineProps({
     }
 });
 
-// changer l'url en fonction du choice.target_chapter_id
+const emit = defineEmits(['change-chapter']);
+
+// Changer l'URL et émettre un événement pour mettre à jour la progression
 function changeUrl(chapterId) {
-    localStorage.setItem('progression', chapterId);
     router.push(`/chapitre/${chapterId}`);
+    emit('change-chapter', chapterId);
 }
 </script>
 
@@ -25,7 +27,7 @@ function changeUrl(chapterId) {
         <h3>Choix :</h3>
         <ul>
             <li v-for="choice in chapter.choices" :key="choice.text">
-                <RouterLink @click="changeUrl(choice.target_chapter_id || 1)" :to="`/chapitre/${choice.target_chapter_id}`">
+                <RouterLink @click.prevent="changeUrl(choice.target_chapter_id || 1)" :to="`/chapitre/${choice.target_chapter_id}`">
                     {{ choice.text }}
                 </RouterLink>
             </li>

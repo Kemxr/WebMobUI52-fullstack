@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
   })->name('chapter');
 });
 
-//Progression
+//Progression (non fonctionnel)
 Route::prefix('api/v1')->group(function () {
   Route::get('/progression/{storyId}', [ProgressionController::class, 'getProgress'])->middleware('auth');
   Route::post('/progression/{storyId}', [ProgressionController::class, 'updateProgress'])->middleware('auth');

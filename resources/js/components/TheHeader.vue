@@ -29,7 +29,7 @@ const csrfToken = window.Laravel && window.Laravel.csrfToken ? window.Laravel.cs
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 header {
-  background-color: #121212;
+  background-color: #0f0f17;
   color: #4ffa00;
   text-align: center;
   padding: 1.5rem 1rem;
