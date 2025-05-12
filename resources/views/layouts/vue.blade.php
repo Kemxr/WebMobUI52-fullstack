@@ -18,7 +18,7 @@
         </script>
         @yield('app')
     </head>
-    <body style="margin: 0; padding: 0; overflow: hidden;">
+    <body style="margin: 0; padding: 0;">
         <div id="app">
             @yield('content')
         </div>

@@ -126,7 +126,7 @@ php artisan key:generate
 touch database/database.sqlite
 ```
 
-5. Configurer `.env` avec vos infos SQLite.
+5. Configurer `.env` avec vos infos SQLite.(Déjà fait par défaut)
 ```
 DB_CONNECTION=sqlite
 ```
