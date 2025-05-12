@@ -34,7 +34,7 @@ Ce projet est une application web interactive dans laquelle l'utilisateur incarn
 ### Backend — Laravel
 
 - API RESTful pour gérer les histoires, chapitres, et choix
-- Authentification avec Laravel Breeze
+- Authentification personnalisée
 - Middleware `admin` pour la protection des routes sensibles
 - Form Requests pour la validation sécurisée des données
 
@@ -43,7 +43,7 @@ Ce projet est une application web interactive dans laquelle l'utilisateur incarn
 - SPA avec Vue Router
 - Composants réutilisables : ChapterDisplay, Header, etc.
 - Gestion dynamique du routing et de l’état
-- Requêtes HTTP via composable `useFetchJson`
+- Requêtes HTTP via composables
 
 ---
 
@@ -73,19 +73,19 @@ Ce projet est une application web interactive dans laquelle l'utilisateur incarn
 
 ### Utilisateur (users)
 
-- id, name, email, password, role (admin ou user), timestamps
+- id, name, email, password, role (admin ou user)
 
 ### Histoire (stories)
 
-- id, title, description, timestamps
+- id, title, description
 
 ### Chapitre (chapters)
 
-- id, story_id (clé étrangère), number, content, timestamps
+- id, story_id (clé étrangère), number, content
 
 ### Choix (choices)
 
-- id, chapter_id, text, target_chapter_id, timestamps
+- id, chapter_id, text, target_chapter_id
 
 ---
 
@@ -120,25 +120,47 @@ npm install
 cp .env.example .env
 php artisan key:generate
 ```
+4. Créer la base de donnée SQLite
 
-Configurer `.env` avec vos infos SQLite.
+```
+touch database/database.sqlite
+```
 
-4. Lancer la base de données
+5. Configurer `.env` avec vos infos SQLite.
+```
+DB_CONNECTION=sqlite
+```
+
+6. Lancer la base de données
 
 ```
 php artisan migrate --seed
 ```
 
-5. Démarrer les serveurs
+7. Build le projet
+
+```
+npm run dev
+```
+
+8. Démarrer les serveur
 
 ```
 composer run dev
 ```
-Et cliquer sur localhost:8000
+Ouvrir un browser et se connecter a localhost
 
-6. Se connecter en temps qu’admin
+9. Se connecter pour tester
+
+### Admin
 
 email : admin@example.com
+
+password : Password123!
+
+### Guest
+
+email : guest@example.com
 
 password : Password123!
 
@@ -157,7 +179,7 @@ password : Password123!
 
 ### Backend
 
-- Laravel 10
+- Laravel 12
 - Authentification personnalisée
 - Eloquent ORM
 
@@ -165,31 +187,14 @@ password : Password123!
 
 - Vue.js 3
 - Vue Router
-- Vite
 
 ### Autres
 
 - SQLite (base de données)
 - Composer / NPM
-- Git / GitHub
+- Vite
 
----
 
-## 🔍 Tests des routes API
-
-### Exemple avec `curl`
-
-```
-curl -X GET http://localhost:8000/api/v1/stories
-```
-
----
-
-## Auteurs
-
-- [Kemxr](https://github.com/Kemxr)
-
----
 
 ## **🧩**Conclusion
 
