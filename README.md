@@ -22,7 +22,6 @@ Ce projet est une application web interactive dans laquelle l'utilisateur incarn
 
 ## ✨ Objectifs du projet
 
-- Créer une fiction interactive multi-plateforme stylisée "pixel rétro"
 - Implémenter une SPA performante avec Vue.js et une API Laravel
 - Intégrer un système de rôles (admin/user) pour la gestion des contenus
 - Favoriser l'autonomie narrative à travers des choix dynamiques et des embranchements multiples
@@ -43,7 +42,6 @@ Ce projet est une application web interactive dans laquelle l'utilisateur incarn
 - SPA avec Vue Router
 - Composants réutilisables : ChapterDisplay, Header, etc.
 - Gestion dynamique du routing et de l’état
-- Requêtes HTTP via composables
 
 ---
 
@@ -96,7 +94,7 @@ Ce projet est une application web interactive dans laquelle l'utilisateur incarn
 - PHP >= 8.2
 - Composer
 - Node.js et npm
-- MySQL
+- SQLite
 
 ### Étapes
 
@@ -126,7 +124,7 @@ php artisan key:generate
 touch database/database.sqlite
 ```
 
-5. Configurer `.env` avec vos infos SQLite.(Déjà fait par défaut)
+5. Configurer `.env` avec vos infos SQLite. (Déjà fait par défaut)
 ```
 DB_CONNECTION=sqlite
 ```

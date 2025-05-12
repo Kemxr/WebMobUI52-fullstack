@@ -21,11 +21,15 @@
                 </li>
             @endforeach
             {{-- Exemple pour évolution futur du site --}}
-            <a href="/home">Escape Game</a>
+            <a class="empty-story" href="/home">Escape Game</a>
             </br>
-            <a href="/home">Life Simulator</a>
+            <a class="empty-story" href="/home">Life Simulator</a>
             </br>
-            <a href="/home">Bookshelf</a>
+            <a class="empty-story" href="/home">Bookshelf</a>
+            </br>
+            <a class="empty-story" href="/home">Crisis Simulator</a>
+            </br>
+            <a class="empty-story" href="/home">Legacy of Kingdom</a>
         </ul>
     </div>
 
@@ -122,6 +126,38 @@
             background-color: rgba(0, 201, 17, 0.3);
             color: #ffffff;
             border-left-width: 8px;
+        }
+
+        ul.story-list a.empty-story {
+            position: relative;
+            background-color: rgba(84, 84, 84, 0.122);
+            color: #b6b6b6;
+            font-size: 1.2rem;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-left: 4px solid #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        ul.story-list a.empty-story:hover {
+            background-color: rgba(93, 40, 40, 0.122);
+            color: #b6b6b6;
+            border-left-width: 8px;
+        }
+
+        ul.story-list a.empty-story:hover::after {
+            content: "Bientôt disponible";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            white-space: nowrap;
+            pointer-events: none;
         }
 
         @media (max-width: 768px) {

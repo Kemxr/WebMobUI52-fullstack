@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\V1\StoryController;
 use App\Http\Controllers\Api\V1\ChapterController;
 use App\Http\Controllers\Api\V1\ChoiceController;
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\Api\V1\ProgressionController;
 
 Route::get('/home', [StoryController::class, 'index'])->middleware('auth')->name('home');
 
