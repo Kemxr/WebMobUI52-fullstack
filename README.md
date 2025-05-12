@@ -140,10 +140,10 @@ php artisan migrate --seed
 7. Build le projet
 
 ```
-npm run dev
+npm run build
 ```
 
-8. Démarrer les serveur
+8. Démarrer les serveurs
 
 ```
 composer run dev

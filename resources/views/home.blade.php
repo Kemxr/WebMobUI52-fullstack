@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <header class="header">
-            <h1 id="typewriter-h1">{{-- Bienvenue, {{ auth()->user()->name }} --}}</h1>
+            <h1 id="typewriter-h1"></h1>
             <form method="POST" action="/logout" class="logout-form">
                 @csrf
                 <button type="submit" class="logout-btn">Logout</button>

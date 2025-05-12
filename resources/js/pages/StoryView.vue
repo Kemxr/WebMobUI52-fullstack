@@ -11,7 +11,7 @@ const user = window.Laravel && window.Laravel.user ? window.Laravel.user : null;
 
 // Déterminer l'ID du chapitre en fonction de la route ou du localStorage
 const chapterId = computed(() => {
-    if (!user) return 1; // Si aucun utilisateur, retourner le chapitre par défaut
+    if (!user) return 1;
 
     const localStorageKey = `progression_user_${user.id}`;
     if (route.params.id) {
@@ -42,12 +42,10 @@ watch(chapterId, (newId) => {
     }
 }, { immediate: true });
 
-// Mettre à jour la progression côté serveur
 const updateProgress = async (newChapterId) => {
     if (user) {
         const localStorageKey = `progression_user_${user.id}`;
         localStorage.setItem(localStorageKey, newChapterId);
-        //Essayer de sauvegarder la progression sur le serveur si ya le temps
         console.log(`Progression sauvegardée pour l'utilisateur ${user.id} : Chapitre ${newChapterId}`);
     }
 };

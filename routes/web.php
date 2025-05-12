@@ -10,27 +10,21 @@ use App\Http\Controllers\Api\V1\ProgressionController;
 Route::get('/home', [StoryController::class, 'index'])->middleware('auth')->name('home');
 
 Route::get('/story/{id}', function () {
-  return view('test');
+  return view('main');
 })->middleware('auth')->name('stories.show');
 
 Route::get('/', function () {
   if (Auth::check()) {
-      return view('test');
+      return view('main');
   }
   return redirect()->route('showLoginForm');
 });
 
 Route::middleware('auth')->group(function () {
   Route::get('/chapitre/{id}', function ($id) {
-      return view('test');
+      return view('main');
   })->name('chapter');
 });
-
-//Progression (non fonctionnel)
-Route::prefix('api/v1')->group(function () {
-  Route::get('/progression/{storyId}', [ProgressionController::class, 'getProgress'])->middleware('auth');
-  Route::post('/progression/{storyId}', [ProgressionController::class, 'updateProgress'])->middleware('auth');
-})->middleware('auth');
 
 //Chapitres
 Route::prefix('api/v1')->group(function () {
@@ -70,5 +64,5 @@ Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logou
 
 //Gère le refresh de la page
 Route::get('/{any}', function () {
-  return view('test');
+  return view('main');
 })->where('any', '.*');
