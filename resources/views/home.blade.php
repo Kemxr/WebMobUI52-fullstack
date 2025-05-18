@@ -186,7 +186,6 @@
             white-space: nowrap;
             overflow: hidden;
             border-right: 3px solid #4ffa00;
-            /* Curseur de la machine à écrire */
         }
 
         @keyframes blink {
@@ -219,7 +218,7 @@
                     if (index < text.length) {
                         element.textContent += text.charAt(index);
                         index++;
-                        setTimeout(type, 100); // Ajustez la vitesse ici
+                        setTimeout(type, 100); //vitesse de l'animation
                     } else if (callback) {
                         callback();
                     }

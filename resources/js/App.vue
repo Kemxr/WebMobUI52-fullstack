@@ -62,7 +62,6 @@ main {
   animation: blink 1.5s infinite;
 }
 
-/* Transition entre pages */
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }
@@ -70,7 +69,6 @@ main {
   opacity: 0;
 }
 
-/* Pour écrans mobiles */
 @media (max-width: 480px) {
   body {
     font-size: 0.9rem;

@@ -2,9 +2,8 @@
 
 ## Projet fullstack Laravel + Vue.js
 
-Ce projet est une application web interactive dans laquelle l'utilisateur incarne un archéologue explorant un labyrinthe mystique. L'histoire évolue selon les choix du joueur. C'est une application en Single Page Application (SPA) avec une API REST, une authentification, et un système de rôles (admin/user).
+Ce projet est une application web interactive dans laquelle l'utilisateur incarne un archéologue explorant un labyrinthe mystique. L'histoire évolue selon les choix du joueur. C'est une application en Single Page Application (SPA) avec une API REST, une authentification, et un système de rôles (admin/guest).
 
-<img src="/public/mazeIcon.svg">
 
 ---
 
